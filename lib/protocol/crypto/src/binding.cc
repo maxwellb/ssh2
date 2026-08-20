@@ -74,7 +74,7 @@ enum ErrorType {
 
 #define POLY1305_KEYLEN   32
 #define POLY1305_TAGLEN   16
-class ChaChaPolyCipher : public ObjectWrap {
+class ChaChaPolyCipher : public Nan::ObjectWrap {
  public:
   static NAN_MODULE_INIT(Init) {
     Local<FunctionTemplate> tpl = Nan::New<FunctionTemplate>(New);
@@ -358,7 +358,8 @@ out:
   static NAN_METHOD(Encrypt) {
     MarkPopErrorOnReturn mark_pop_error_on_return;
 
-    ChaChaPolyCipher* obj = ObjectWrap::Unwrap<ChaChaPolyCipher>(info.Holder());
+    ChaChaPolyCipher* obj =
+      Nan::ObjectWrap::Unwrap<ChaChaPolyCipher>(info.Holder());
 
     if (!Buffer::HasInstance(info[0]))
       return Nan::ThrowTypeError("Missing/Invalid packet");
@@ -386,7 +387,8 @@ out:
   }
 
   static NAN_METHOD(Free) {
-    ChaChaPolyCipher* obj = ObjectWrap::Unwrap<ChaChaPolyCipher>(info.Holder());
+    ChaChaPolyCipher* obj =
+      Nan::ObjectWrap::Unwrap<ChaChaPolyCipher>(info.Holder());
     obj->clear();
   }
 
@@ -407,7 +409,7 @@ out:
 #endif
 };
 
-class AESGCMCipher : public ObjectWrap {
+class AESGCMCipher : public Nan::ObjectWrap {
  public:
   static NAN_MODULE_INIT(Init) {
     Local<FunctionTemplate> tpl = Nan::New<FunctionTemplate>(New);
@@ -605,7 +607,7 @@ out:
   static NAN_METHOD(Encrypt) {
     MarkPopErrorOnReturn mark_pop_error_on_return;
 
-    AESGCMCipher* obj = ObjectWrap::Unwrap<AESGCMCipher>(info.Holder());
+    AESGCMCipher* obj = Nan::ObjectWrap::Unwrap<AESGCMCipher>(info.Holder());
 
     if (!Buffer::HasInstance(info[0]))
       return Nan::ThrowTypeError("Missing/Invalid packet");
@@ -635,7 +637,7 @@ out:
   }
 
   static NAN_METHOD(Free) {
-    AESGCMCipher* obj = ObjectWrap::Unwrap<AESGCMCipher>(info.Holder());
+    AESGCMCipher* obj = Nan::ObjectWrap::Unwrap<AESGCMCipher>(info.Holder());
     obj->clear();
   }
 
@@ -647,7 +649,7 @@ out:
   EVP_CIPHER_CTX* ctx_;
 };
 
-class GenericCipher : public ObjectWrap {
+class GenericCipher : public Nan::ObjectWrap {
  public:
   static NAN_MODULE_INIT(Init) {
     Local<FunctionTemplate> tpl = Nan::New<FunctionTemplate>(New);
@@ -987,7 +989,7 @@ out:
   static NAN_METHOD(Encrypt) {
     MarkPopErrorOnReturn mark_pop_error_on_return;
 
-    GenericCipher* obj = ObjectWrap::Unwrap<GenericCipher>(info.Holder());
+    GenericCipher* obj = Nan::ObjectWrap::Unwrap<GenericCipher>(info.Holder());
 
     if (!Buffer::HasInstance(info[0]))
       return Nan::ThrowTypeError("Missing/Invalid packet");
@@ -1019,7 +1021,7 @@ out:
   }
 
   static NAN_METHOD(Free) {
-    GenericCipher* obj = ObjectWrap::Unwrap<GenericCipher>(info.Holder());
+    GenericCipher* obj = Nan::ObjectWrap::Unwrap<GenericCipher>(info.Holder());
     obj->clear();
   }
 
@@ -1042,7 +1044,7 @@ out:
 
 // =============================================================================
 
-class ChaChaPolyDecipher : public ObjectWrap {
+class ChaChaPolyDecipher : public Nan::ObjectWrap {
  public:
   static NAN_MODULE_INIT(Init) {
     Local<FunctionTemplate> tpl = Nan::New<FunctionTemplate>(New);
@@ -1369,7 +1371,7 @@ out:
     MarkPopErrorOnReturn mark_pop_error_on_return;
 
     ChaChaPolyDecipher* obj =
-      ObjectWrap::Unwrap<ChaChaPolyDecipher>(info.Holder());
+      Nan::ObjectWrap::Unwrap<ChaChaPolyDecipher>(info.Holder());
 
     if (!Buffer::HasInstance(info[0]) || Buffer::Length(info[0]) != 4)
       return Nan::ThrowTypeError("Missing/Invalid length bytes");
@@ -1408,7 +1410,7 @@ out:
     MarkPopErrorOnReturn mark_pop_error_on_return;
 
     ChaChaPolyDecipher* obj =
-      ObjectWrap::Unwrap<ChaChaPolyDecipher>(info.Holder());
+      Nan::ObjectWrap::Unwrap<ChaChaPolyDecipher>(info.Holder());
 
     if (!Buffer::HasInstance(info[0]))
       return Nan::ThrowTypeError("Missing/Invalid packet");
@@ -1448,7 +1450,7 @@ out:
 
   static NAN_METHOD(Free) {
     ChaChaPolyDecipher* obj =
-      ObjectWrap::Unwrap<ChaChaPolyDecipher>(info.Holder());
+      Nan::ObjectWrap::Unwrap<ChaChaPolyDecipher>(info.Holder());
     obj->clear();
   }
 
@@ -1470,7 +1472,7 @@ out:
 #endif
 };
 
-class AESGCMDecipher : public ObjectWrap {
+class AESGCMDecipher : public Nan::ObjectWrap {
  public:
   static NAN_MODULE_INIT(Init) {
     Local<FunctionTemplate> tpl = Nan::New<FunctionTemplate>(New);
@@ -1663,7 +1665,8 @@ out:
   static NAN_METHOD(Decrypt) {
     MarkPopErrorOnReturn mark_pop_error_on_return;
 
-    AESGCMDecipher* obj = ObjectWrap::Unwrap<AESGCMDecipher>(info.Holder());
+    AESGCMDecipher* obj =
+      Nan::ObjectWrap::Unwrap<AESGCMDecipher>(info.Holder());
 
     if (!Buffer::HasInstance(info[0]))
       return Nan::ThrowTypeError("Missing/Invalid packet");
@@ -1708,7 +1711,8 @@ out:
   }
 
   static NAN_METHOD(Free) {
-    AESGCMDecipher* obj = ObjectWrap::Unwrap<AESGCMDecipher>(info.Holder());
+    AESGCMDecipher* obj =
+      Nan::ObjectWrap::Unwrap<AESGCMDecipher>(info.Holder());
     obj->clear();
   }
 
@@ -1720,7 +1724,7 @@ out:
   EVP_CIPHER_CTX* ctx_;
 };
 
-class GenericDecipher : public ObjectWrap {
+class GenericDecipher : public Nan::ObjectWrap {
  public:
   static NAN_MODULE_INIT(Init) {
     Local<FunctionTemplate> tpl = Nan::New<FunctionTemplate>(New);
@@ -2121,7 +2125,8 @@ out:
   static NAN_METHOD(DecryptBlock) {
     MarkPopErrorOnReturn mark_pop_error_on_return;
 
-    GenericDecipher* obj = ObjectWrap::Unwrap<GenericDecipher>(info.Holder());
+    GenericDecipher* obj =
+      Nan::ObjectWrap::Unwrap<GenericDecipher>(info.Holder());
 
     if (!Buffer::HasInstance(info[0]))
       return Nan::ThrowTypeError("Missing/Invalid block");
@@ -2151,7 +2156,8 @@ out:
   static NAN_METHOD(Decrypt) {
     MarkPopErrorOnReturn mark_pop_error_on_return;
 
-    GenericDecipher* obj = ObjectWrap::Unwrap<GenericDecipher>(info.Holder());
+    GenericDecipher* obj =
+      Nan::ObjectWrap::Unwrap<GenericDecipher>(info.Holder());
 
     if (!Buffer::HasInstance(info[0]))
       return Nan::ThrowTypeError("Missing/Invalid packet");
@@ -2197,7 +2203,8 @@ out:
   }
 
   static NAN_METHOD(Free) {
-    GenericDecipher* obj = ObjectWrap::Unwrap<GenericDecipher>(info.Holder());
+    GenericDecipher* obj =
+      Nan::ObjectWrap::Unwrap<GenericDecipher>(info.Holder());
     obj->clear();
   }
 
